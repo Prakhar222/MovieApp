@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yash.mba.domain.Movie;
+import com.yash.mba.domain.Screening;
 import com.yash.mba.domain.Seat;
+import com.yash.mba.service.ScreeningService;
 import com.yash.mba.service.SeatService;
 
 @RestController
@@ -23,11 +25,15 @@ import com.yash.mba.service.SeatService;
 @RequestMapping("/seat")
 public class SeatController {
     private SeatService seatService;
-
+    private  ScreeningService screeningService;
+    
     @Autowired
-    public SeatController(SeatService seatService) {
+    public SeatController(SeatService seatService,ScreeningService screeningService) {
         this.seatService = seatService;
+        this.screeningService=screeningService;
     }
+  
+    
 
     @GetMapping("/seats")
     public List<Seat> getAllSeats() {
@@ -51,5 +57,24 @@ public class SeatController {
 		return ResponseEntity.noContent().build();
 
 	}  
+    
+    @GetMapping("/seatbyauditoriumid/{auditorium_id}")
+    public List<Seat> getSeatsByAuditoriumId(@PathVariable Long auditorium_id) {
+      List<Seat> seats =seatService.getAllSeats();
+      List<Seat> seats2 = seats.stream().filter(s -> s.getAuditorium().getId()==auditorium_id).toList();
+    	return seats2;  
+        }
+   
+    @GetMapping("/seatsbyscreeningid/{screening_id}")
+    public List<Seat> getSeatsByScreeningId(@PathVariable Long screening_id) {
+    	Screening screening= screeningService.getScreeningById(screening_id);
+    	List<Seat> seats=seatService.getAllSeats();
+    	List<Seat> seats2=seats.stream().filter(s->s.getAuditorium().getId()==screening.getAuditorium().getId()).toList();
+    	
+		return seats2;
+    
+    }
+    
+    
     
 }

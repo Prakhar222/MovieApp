@@ -49,7 +49,7 @@ public class ScreeningController {
         return ResponseEntity.status(HttpStatus.OK).body(screenings);
     }
 
-    @GetMapping("/screenings/{screening_id}")
+    @GetMapping("/{screening_id}")
     public ResponseEntity<?> getScreenById(@PathVariable Long screening_id) {
         Screening screening = screeningService.getScreeningById(screening_id);
         return ResponseEntity.status(HttpStatus.OK).body(screening);
@@ -98,11 +98,7 @@ public class ScreeningController {
  		List<Screening> screenings2=screenings.stream().filter(s -> s.getMovie().getId()==movie_id).toList();
 		return screenings2;
     	
-    	
-    	
     }
     
-    
-
     
 }
