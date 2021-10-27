@@ -44,7 +44,7 @@ public class TheatreController {
 	public ResponseEntity<Theatre>pushTheatre (@RequestBody Theatre theatre)
 	{    	
     	theatreService.pushTheatre(theatre);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	} 
     

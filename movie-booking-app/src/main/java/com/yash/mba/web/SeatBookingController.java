@@ -49,7 +49,7 @@ public class SeatBookingController {
 	public ResponseEntity<Movie>pushMovie (@RequestBody SeatBooking seatBooking)
 	{    	
 		seatBookingService.pushSeatBooking(seatBooking);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}  
 }

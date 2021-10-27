@@ -18,11 +18,15 @@ public class Seat {
   @Column(name = "seat_number")
   private Integer seatNumber;
 
+  
   @ManyToOne
   @JsonIgnore
   @JoinColumn(name = "auditorium_id")
   @JsonManagedReference
   private Auditorium auditorium;
+  
+  @Column(name = "is_booked")
+  private boolean isBooked;
 
 //  @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
 //  @JsonBackReference
@@ -52,6 +56,8 @@ public void setAuditorium(Auditorium auditorium) {
 	this.auditorium = auditorium;
 }
 
+
+
 //public Set<SeatBooked> getBookedSeats() {
 //	return bookedSeats;
 //}
@@ -60,9 +66,19 @@ public void setAuditorium(Auditorium auditorium) {
 //	this.bookedSeats = bookedSeats;
 //}
 
+public boolean isBooked() {
+	return isBooked;
+}
+
+public void setBooked(boolean isBooked) {
+	this.isBooked = isBooked;
+}
+
+
+
 @Override
 public String toString() {
-	return "Seat [id=" + id + ", seatNumber=" + seatNumber + ", auditorium=" + auditorium + ", bookedSeats="
+	return "Seat [id=" + id + ", seatNumber=" + seatNumber + ", auditorium=" + auditorium + ", isBooked=" + isBooked
 			+ "]";
 }
 

@@ -71,7 +71,7 @@ public class ScreeningController {
 	public ResponseEntity<Movie>pushScreening (@RequestBody Screening screening)
 	{    	
 		screeningService.pushScreening(screening);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	} 
     

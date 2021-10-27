@@ -46,7 +46,7 @@ public class CustomerController
 		public ResponseEntity<Customer>pushCustomer (@RequestBody Customer customer)
 		{    	
 			customerService.pushCustomer(customer);
-			return ResponseEntity.noContent().build();
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 
 		}  
 	 

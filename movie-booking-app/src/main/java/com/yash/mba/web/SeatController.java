@@ -54,7 +54,7 @@ public class SeatController {
 	public ResponseEntity<Movie>pushSeat (@RequestBody Seat seat)
 	{    	
 		seatService.pushSeat(seat);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}  
     

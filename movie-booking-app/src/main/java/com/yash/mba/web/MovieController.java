@@ -67,7 +67,7 @@ public class MovieController {
 	public ResponseEntity<Movie>pushMovie (@RequestBody Movie movie)
 	{    	
 		movieService.saveMovie(movie);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}  
 }
