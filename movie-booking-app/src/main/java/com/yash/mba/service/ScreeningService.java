@@ -13,9 +13,12 @@ public interface ScreeningService {
 
     Screening pushScreening(Screening newScreening);
 
+    void deleteScreening(Long screening_id);
+    
     Screening updateScreening(Screening updatedScreening, Long screening_id);
 
     List<Seat> getSeatsByScreeningId(Long screening_id);
 
     List<Screening> getAllScreenings(LocalDate startDate, LocalDate endDate);
+    
 }

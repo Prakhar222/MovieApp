@@ -71,5 +71,11 @@ public class ScreeningServiceImpl implements ScreeningService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void deleteScreening(Long screening_id) {
+		// TODO Auto-generated method stub
+		 screeningRepository.deleteById(screening_id);
+		
+	}
 
 }
