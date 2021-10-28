@@ -68,6 +68,20 @@ public class UserController {
 		return ResponseEntity.noContent().build();
 	}
     
-    
+    @PostMapping("/save")
+    public boolean pushUser(@RequestBody User user) {
+    	List<User> users=userService.getAllUsers();
+    	List<User> users2=users.stream().filter(s->s.getUserName().matches(user.getUserName())).toList();
+		if(users2.size()>0)
+		{
+			return false;
+		}
+		else {
+			userService.pushUser(user);
+			return true;
+		}
+    	
+    	
+    }
     
 }

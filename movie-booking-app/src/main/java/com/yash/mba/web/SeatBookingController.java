@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yash.mba.domain.Movie;
+import com.yash.mba.domain.Screening;
 import com.yash.mba.domain.SeatBooking;
 import com.yash.mba.service.SeatBookingService;
 
@@ -52,4 +53,15 @@ public class SeatBookingController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}  
+    
+
+
+    @GetMapping("/seatbookingbyid/{user_id}")
+    public List<SeatBooking> getScreeningsById( @PathVariable Long user_id) {
+    	 List<SeatBooking> seatBookings=seatBookingService.getAllSeatBooking();
+ 		List<SeatBooking> seatBookings2=seatBookings.stream().filter(s -> s.getUser().getId()==user_id).toList();
+		return seatBookings2;
+    	
+    }
+    
 }
