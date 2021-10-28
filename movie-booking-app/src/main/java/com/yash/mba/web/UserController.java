@@ -34,17 +34,32 @@ public class UserController {
         return userService.getAllUsers();
     }
     
+//    @PostMapping("/check")
+//     public boolean checkUserDetails(@RequestBody User user)  {
+//
+//    	List<User> users=userService.getAllUsers();
+//    	List<User> uName=users.stream().filter(u -> u.getUserName().matches(user.getUserName())).toList();
+//    	List<User> uPassword=users.stream().filter(u -> u.getPassword().matches(user.getPassword())).toList();
+//
+//    	if (uName.size() >= 1 && uPassword.size() >=1)
+//    		return true;
+//    	else
+//    		return false;	
+//    }
+    
     @PostMapping("/check")
-     public boolean checkUserDetails(@RequestBody User user)  {
+    public long checkUserDetails(@RequestBody User user) {
 
-    	List<User> users=userService.getAllUsers();
-    	List<User> uName=users.stream().filter(u -> u.getUserName().matches(user.getUserName())).toList();
-    	List<User> uPassword=users.stream().filter(u -> u.getPassword().matches(user.getPassword())).toList();
+    List<User> users=userService.getAllUsers();
+    List<User> uName=users.stream().filter(u -> u.getUserName().matches(user.getUserName())).limit(1).toList();
+    List<User> uPassword=users.stream().filter(u -> u.getPassword().matches(user.getPassword())).limit(1).toList();
 
-    	if (uName.size() >= 1 && uPassword.size() >=1)
-    		return true;
-    	else
-    		return false;	
+    if (uName.size() >= 1 && uPassword.size() >=1) {
+    User userId=uPassword.get(0);
+    return userId.getId();
+    }
+    else
+    return 0;
     }
     
     @DeleteMapping("/users/{user_id}")
